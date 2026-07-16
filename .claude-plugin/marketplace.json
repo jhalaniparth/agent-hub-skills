@@ -1,0 +1,22 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "sap-six-agent-hub",
+  "description": "SAP SiX agent development skills — deploy agents to BTP Cloud Foundry, generate Joule capabilities, and design Joule agents",
+  "owner": {
+    "name": "SAP SiX Team"
+  },
+  "plugins": [
+    {
+      "name": "agent-hub-skills",
+      "description": "Three skills for SAP agent development: deploy to BTP CF, generate Joule capabilities, and design Joule agents for Joule Studio.",
+      "author": {
+        "name": "SAP SiX Team"
+      },
+      "category": "developer-tools",
+      "source": {
+        "source": "github",
+        "repo": "six-cit-ai/agent-hub-skills"
+      }
+    }
+  ]
+}
