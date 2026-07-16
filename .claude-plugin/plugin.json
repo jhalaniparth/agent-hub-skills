@@ -1,0 +1,6 @@
+{
+  "name": "agent-hub-skills",
+  "description": "SAP SiX skills for deploying agents to BTP Cloud Foundry, generating Joule capabilities, and designing Joule agents",
+  "version": "1.0.0",
+  "author": { "name": "SAP SiX Team" }
+}
