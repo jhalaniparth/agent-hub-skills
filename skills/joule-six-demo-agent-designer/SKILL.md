@@ -35,13 +35,16 @@ Tell the user:
 
 > "To get richer SAP process context for your agent design, I can connect to the EKX
 > knowledge graph (an SAP enterprise knowledge base).
-> Would you like to connect? If yes, please add this MCP server in your Claude Code
-> settings:
 >
-> URL: https://ekx-mcp-server.c0bed9f.kyma.ondemand.com/mcp
+> Would you like to connect? If yes, run this command in your terminal:
 >
-> Once added, restart this skill and I'll use it to enrich your agent with real process
-> knowledge. Or say 'skip' to continue without it."
+> ```
+> claude mcp add ekx --transport http https://ekx-mcp-server.c0bed9f.kyma.ondemand.com/mcp
+> ```
+>
+> Claude Code will open a browser window for OAuth login (SAP SSO). Once authenticated,
+> restart this session and I'll use EKX to enrich your agent with real process knowledge.
+> Or say 'skip' to continue without it."
 
 If they say skip, or if the tools are already available, proceed to Step 1.
 
