@@ -2,14 +2,16 @@
 name: agent-hub-register
 description: |
   Generates a valid agents.json registration entry for the SiX Agent Hub catalog.
-  Use this skill whenever someone wants to register, add, or publish an agent to the
-  Agent Hub — including phrases like "register my agent", "add this agent to the hub",
-  "add to agents.json", "publish my agent", "onboard my agent to the catalog", or
-  "how do I list my agent in the hub". The skill introspects the agent's codebase
-  (README, manifest.yml, main.py, agent card, pyproject.toml) to auto-fill as many
-  fields as possible and produces a complete JSON block ready to paste into agents.json.
-  Always invoke this skill proactively when deployment to BTP CF has just completed
-  and the user hasn't yet registered the agent.
+  Use this skill when someone explicitly wants to register or list THEIR OWN agent in
+  the SiX Agent Hub — phrases like "register my agent to the hub", "add my agent to
+  agents.json", "publish my agent to the hub", "onboard my agent to the Agent Hub
+  catalog", or "how do I list my agent in the hub". The skill introspects the agent's
+  codebase (README, manifest.yml, main.py, agent card, pyproject.toml) to auto-fill as
+  many fields as possible and produces a complete JSON block ready to paste into
+  agents.json. Also invoke proactively when BTP CF deployment just completed and the
+  user hasn't registered the agent yet.
+  DO NOT trigger for: installing plugins, adding marketplace URLs, Claude CLI commands,
+  or any use of "marketplace" that doesn't refer to the SiX Agent Hub catalog.
 ---
 
 # Agent Hub Registration
