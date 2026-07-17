@@ -182,10 +182,8 @@ responsible for surfacing a confirmation prompt back through the A2A response.
 
 ## Using the joule-capability-developer subagent
 
-For non-trivial requests (complex scenarios, custom action groups beyond A2A,
-role-based visibility, conversation starters, async flows), delegate to the
-**joule-capability-developer** subagent. That agent has the full Joule
-Development Guide loaded and can handle:
+For non-trivial requests, delegate to the **joule-capability-developer** subagent rather than generating files inline. Use the subagent when any of these apply:
+- Mixed output types across scenarios (requires multiple function files)
 - `user-confirmation` action groups
 - `visibility_condition` (ibn_targets / ias_attributes)
 - `conversation_starter` definitions
@@ -193,4 +191,21 @@ Development Guide loaded and can handle:
 - Localization (i18n) wiring
 - `deployment_extension.yaml` for environment-specific config
 
-Invoke it with the full set of gathered inputs and the output folder path.
+**Subagent input (pass as structured JSON):**
+```json
+{
+  "agent_name": "...",
+  "destination_name": "...",
+  "namespace": "...",
+  "capability_name": "...",
+  "version": "...",
+  "output_folder": "...",
+  "scenarios": [
+    {"title": "...", "description": "...", "output_type": "genai|text|card|list|quick_replies"}
+  ]
+}
+```
+
+The subagent has the full Joule Development Guide loaded, reads `references/file-templates.md` and `references/output-type-templates.md` itself, writes all files to the output folder, and returns a file-tree summary.
+
+For simple single-scenario genai capabilities, generate inline using Steps 3–4 without delegating.

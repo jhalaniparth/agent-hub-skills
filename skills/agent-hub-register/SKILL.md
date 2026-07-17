@@ -118,21 +118,9 @@ After the user fills in the TODOs, remind them:
 
 If the user is in the Agent Hub repo directory, offer to do steps 2–4 automatically.
 
-## Schema Reference (quick)
+## Schema Reference
 
-```
-Required: id, name, shortDescription (≤160), status, agentType, industry,
-          businessProcess, owner, landscapes (≥1), samplePrompts (≥1)
-
-status:       "live" | "development" | "deprecated"
-agentType:    "joule" | "custom-ui" | "api-based" | "workflow"
-landscapes[].tier:    "DEV" | "QA" | "PROD"
-landscapes[].status:  "live" | "degraded" | "down" | "unknown"
-samplePrompts[].category: "Basic" | "Advanced" | "Edge Case"
-autonomousDomain: "Autonomous Finance" | "Autonomous Supply Chain" |
-                  "Autonomous Procurement" | "Autonomous HR" |
-                  "Autonomous Sales" | "Autonomous Operations" | "Other"
-```
+See `references/schema.md` for all allowed enum values, required fields, and the id format pattern.
 
 ## Integration
 
