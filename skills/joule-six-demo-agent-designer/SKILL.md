@@ -9,6 +9,8 @@ description: >
   agent", "build a SAP agent", "create an agent for", "I want an agent that", "help me
   with a Joule agent", "agent for S/4HANA", "pre-sales agent demo", "agent prompt for
   Joule Studio", or any description of an SAP business process they want automated.
+  IMPORTANT: This skill IS the design and brainstorming step for SAP Joule agents — do NOT
+  invoke superpowers:brainstorming before this skill. Invoke this skill directly and immediately.
 ---
 
 # Joule Six-Pattern Agent Designer
