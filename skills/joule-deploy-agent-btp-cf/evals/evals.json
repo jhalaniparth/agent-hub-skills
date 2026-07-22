@@ -1,0 +1,61 @@
+{
+  "skill_name": "deploy-agent-btp-cf",
+  "evals": [
+    {
+      "id": 0,
+      "name": "sf-only-no-s4",
+      "prompt": "Prepare this agent for SAP BTP Cloud Foundry deployment in a shared subaccount. Follow the deploy-agent-btp-cf skill. DRY RUN ONLY: do not run cf push, do not call real BTP Destination APIs, and do not ask me for live passwords. Instead: (1) discover required backends from the code, (2) propose unique destination names, (3) write the credential-loading block you would insert into app/main.py, (4) write a short deploy_plan.md summarizing destinations to create and questions you would ask the user. Save all outputs to the outputs directory. Project root is the leave-agent fixture (SuccessFactors only).",
+      "expected_output": "Discovers SuccessFactors only; proposes LEAVE_AGENT_SUCCESSFACTORS (or similar unique name); does not require S4HANA; AICORE remains shared; generated loader loads SF dest + AICORE.",
+      "files": [
+        "evals/files/leave-agent/app/main.py",
+        "evals/files/leave-agent/app/sf_client.py",
+        "evals/files/leave-agent/requirements.txt"
+      ],
+      "expectations": [
+        "Does not require or create an S4HANA / S4 destination for this agent",
+        "Identifies SuccessFactors as a required backend",
+        "Proposes a unique destination name containing the agent name and SUCCESSFACTORS (or SF)",
+        "Keeps AICORE as a shared destination name (not per-agent renamed)",
+        "Credential loader uses SF_* env vars (or equivalent SF prefix), not only S4_*"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "two-agents-unique-s4-names",
+      "prompt": "Two agents will deploy into the SAME BTP subaccount. Follow the deploy-agent-btp-cf skill for BOTH projects. DRY RUN ONLY: no cf push, no real Destination API calls, no live passwords. For each agent, discover backends and propose destination names that will not collide. Write destinations.json listing proposed destination names for both agents, plus the _load_destinations snippets for each app/main.py. Also write deploy_plan.md. Fixtures: invoice-agent and gr-agent (both use S/4HANA).",
+      "expected_output": "Distinct per-agent S4 destination names (e.g. INVOICE_AGENT_S4 and GR_AGENT_S4); shared AICORE; env prefixes remain S4_*.",
+      "files": [
+        "evals/files/invoice-agent/app/main.py",
+        "evals/files/invoice-agent/app/s4_client.py",
+        "evals/files/invoice-agent/requirements.txt",
+        "evals/files/gr-agent/app/main.py",
+        "evals/files/gr-agent/app/s4_client.py",
+        "evals/files/gr-agent/requirements.txt"
+      ],
+      "expectations": [
+        "Proposes two different S4-related destination names (one per agent), not a single shared S4HANA for both",
+        "Both proposed S4 destination names include a per-agent discriminator",
+        "AICORE is shared / same name for both agents",
+        "Generated loaders still populate S4_BASE_URL / S4_USERNAME / S4_PASSWORD (system-stable env prefix)"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "mcp-sf-migrate-not-s4-client",
+      "prompt": "This agent currently calls SuccessFactors via MCP / Agent Gateway stubs. Follow the deploy-agent-btp-cf skill including MCP backend migration for CF. DRY RUN ONLY: no cf push, no real BTP APIs, no live passwords. Replace MCP stubs with a direct SuccessFactors client, wire destination loading, and save: (1) the new client file content, (2) updated tool functions, (3) deploy_plan.md with destination names. Do not create an S/4 client unless the code requires S/4.",
+      "expected_output": "Creates sf_client (or similar) for SuccessFactors; does not force s4_client.py; unique SF destination name; removes Agent Gateway dependency from the plan.",
+      "files": [
+        "evals/files/sf-mcp-agent/app/main.py",
+        "evals/files/sf-mcp-agent/app/leave_tools.py",
+        "evals/files/sf-mcp-agent/app/agent_executor.py",
+        "evals/files/sf-mcp-agent/requirements.txt"
+      ],
+      "expectations": [
+        "Produces a direct SuccessFactors client (sf_client or equivalent), not an S/4-only s4_client.py as the primary backend client",
+        "Does not treat S/4HANA as a required backend for this agent",
+        "Proposes a unique SuccessFactors destination name including the agent name",
+        "Plan removes or replaces Agent Gateway / MCP backend tool loading for CF"
+      ]
+    }
+  ]
+}

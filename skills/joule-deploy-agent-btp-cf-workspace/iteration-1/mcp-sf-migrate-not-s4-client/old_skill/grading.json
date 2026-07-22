@@ -1,0 +1,31 @@
+{
+  "expectations": [
+    {
+      "text": "Produces a direct SuccessFactors client (sf_client or equivalent), not an S/4-only s4_client.py as the primary backend client",
+      "passed": false,
+      "evidence": "Primary client created is s4_client.py titled 'Direct OData client for SAP S/4HANA'; leave_tools.py imports get_purchase_order/get_goods_receipts from s4_client and maps employee/leave tools onto PO/GR APIs."
+    },
+    {
+      "text": "Does not treat S/4HANA as a required backend for this agent",
+      "passed": false,
+      "evidence": "main.py _load_destinations loads S4HANA; s4_client requires S4_* env and Destination 'S4HANA'."
+    },
+    {
+      "text": "Proposes a unique SuccessFactors destination name including the agent name",
+      "passed": false,
+      "evidence": "deploy_plan.md only lists destinations S4HANA and AICORE; asks user for S/4 credentials for S4HANA. No unique SF destination name."
+    },
+    {
+      "text": "Plan removes or replaces Agent Gateway / MCP backend tool loading for CF",
+      "passed": true,
+      "evidence": "agent_executor.py removes Agent Gateway MCP loading; leave_tools no longer returns MCP stub messages; requirements.txt cleanup expected per skill (present in outputs)."
+    }
+  ],
+  "summary": {
+    "passed": 1,
+    "failed": 3,
+    "total": 4,
+    "pass_rate": 0.25
+  },
+  "notes": "Strong baseline failure: SF MCP agent forced onto S/4 OData client and S4HANA destination. MCP removal itself succeeded."
+}

@@ -1,0 +1,12 @@
+{
+  "eval_id": 0,
+  "eval_name": "sf-only-no-s4",
+  "prompt": "Prepare this agent for SAP BTP Cloud Foundry deployment in a shared subaccount. Follow the deploy-agent-btp-cf skill. DRY RUN ONLY: do not run cf push, do not call real BTP Destination APIs, and do not ask me for live passwords. Instead: (1) discover required backends from the code, (2) propose unique destination names, (3) write the credential-loading block you would insert into app/main.py, (4) write a short deploy_plan.md summarizing destinations to create and questions you would ask the user. Save all outputs to the outputs directory. Project root is the leave-agent fixture (SuccessFactors only).",
+  "assertions": [
+    "Does not require or create an S4HANA / S4 destination for this agent",
+    "Identifies SuccessFactors as a required backend",
+    "Proposes a unique destination name containing the agent name and SUCCESSFACTORS (or SF)",
+    "Keeps AICORE as a shared destination name (not per-agent renamed)",
+    "Credential loader uses SF_* env vars (or equivalent SF prefix), not only S4_*"
+  ]
+}

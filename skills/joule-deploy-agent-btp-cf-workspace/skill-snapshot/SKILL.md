@@ -71,9 +71,9 @@ If the project has a `s4_client.py` with hardcoded S4 credentials, replace them 
 
 ---
 
-## Step 3 — Create the CF deployment files
+## Step 3 — Create the three CF deployment files
 
-Write these files into the same directory as `requirements.txt`:
+Write these three files into the same directory as `requirements.txt`:
 
 **Procfile** — adjust the module path to match the actual entry point:
 ```
@@ -83,23 +83,6 @@ web: python app/main.py --host 0.0.0.0 --port $PORT
 **runtime.txt**:
 ```
 python-3.11.x
-```
-
-**.cfignore** — exclude local Python environments and caches from the push droplet.
-The Python buildpack installs dependencies from `requirements.txt` at staging time, so
-shipping a local `venv` / `site-packages` wastes upload time and can break the runtime:
-
-```
-.venv/
-venv/
-env/
-__pycache__/
-*.py[cod]
-*.egg-info/
-.pytest_cache/
-.mypy_cache/
-.git/
-*.pyc
 ```
 
 **manifest.yml** — use the health endpoint from `asset.yaml` if present:

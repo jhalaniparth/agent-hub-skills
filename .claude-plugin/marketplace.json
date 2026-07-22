@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "agent-hub-skills",
-      "description": "Three skills for SAP agent development: deploy to BTP CF, generate Joule capabilities, and design Joule agents for Joule Studio.",
+      "description": "Four skills for SAP agent development: deploy to BTP CF, generate Joule capabilities, design Joule agents for Joule Studio, and register agents to the SiX Agent Hub.",
       "author": {
         "name": "SAP SiX Team"
       },

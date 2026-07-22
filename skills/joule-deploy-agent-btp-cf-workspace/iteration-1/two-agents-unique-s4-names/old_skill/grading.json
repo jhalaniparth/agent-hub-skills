@@ -1,0 +1,31 @@
+{
+  "expectations": [
+    {
+      "text": "Proposes two different S4-related destination names (one per agent), not a single shared S4HANA for both",
+      "passed": false,
+      "evidence": "destinations.json uses name S4HANA for both invoice-agent and gr-agent; collision_note states both request S4HANA."
+    },
+    {
+      "text": "Both proposed S4 destination names include a per-agent discriminator",
+      "passed": false,
+      "evidence": "Both agents use identical destination name S4HANA with no agent discriminator."
+    },
+    {
+      "text": "AICORE is shared / same name for both agents",
+      "passed": true,
+      "evidence": "Both agents list destination AICORE; deploy_plan.md marks AICORE as shared intentional."
+    },
+    {
+      "text": "Generated loaders still populate S4_BASE_URL / S4_USERNAME / S4_PASSWORD (system-stable env prefix)",
+      "passed": true,
+      "evidence": "destinations.json env_mapping and deploy_plan document S4_BASE_URL / S4_USERNAME / S4_PASSWORD for both loaders."
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 2,
+    "total": 4,
+    "pass_rate": 0.5
+  },
+  "notes": "Baseline correctly shows shared-subaccount S4HANA name collision between two agents."
+}
