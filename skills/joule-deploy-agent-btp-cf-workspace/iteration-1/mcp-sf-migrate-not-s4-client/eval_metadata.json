@@ -1,0 +1,11 @@
+{
+  "eval_id": 2,
+  "eval_name": "mcp-sf-migrate-not-s4-client",
+  "prompt": "This agent currently calls SuccessFactors via MCP / Agent Gateway stubs. Follow the deploy-agent-btp-cf skill including MCP backend migration for CF. DRY RUN ONLY: no cf push, no real BTP APIs, no live passwords. Replace MCP stubs with a direct SuccessFactors client, wire destination loading, and save: (1) the new client file content, (2) updated tool functions, (3) deploy_plan.md with destination names. Do not create an S/4 client unless the code requires S/4.",
+  "assertions": [
+    "Produces a direct SuccessFactors client (sf_client or equivalent), not an S/4-only s4_client.py as the primary backend client",
+    "Does not treat S/4HANA as a required backend for this agent",
+    "Proposes a unique SuccessFactors destination name including the agent name",
+    "Plan removes or replaces Agent Gateway / MCP backend tool loading for CF"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "expectations": [
+    {
+      "text": "Does not require or create an S4HANA / S4 destination for this agent",
+      "passed": false,
+      "evidence": "deploy_plan.md lists destination S4HANA as skill-mandated and asks user for S/4 credentials; main_credential_loader.py calls get_subaccount_destination(\"S4HANA\")."
+    },
+    {
+      "text": "Identifies SuccessFactors as a required backend",
+      "passed": true,
+      "evidence": "deploy_plan.md Backends discovered: SuccessFactors via app/sf_client.py and SF_* env vars."
+    },
+    {
+      "text": "Proposes a unique destination name containing the agent name and SUCCESSFACTORS (or SF)",
+      "passed": false,
+      "evidence": "Only proposes S4HANA and AICORE; explicitly notes no per-agent rename and no SF destination loader."
+    },
+    {
+      "text": "Keeps AICORE as a shared destination name (not per-agent renamed)",
+      "passed": true,
+      "evidence": "Loader and deploy_plan use destination name AICORE unchanged."
+    },
+    {
+      "text": "Credential loader uses SF_* env vars (or equivalent SF prefix), not only S4_*",
+      "passed": false,
+      "evidence": "main_credential_loader.py only sets S4_* and AICORE_*; no SF_BASE_URL/SF_USERNAME/SF_PASSWORD loading from a destination."
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 3,
+    "total": 5,
+    "pass_rate": 0.4
+  },
+  "notes": "Baseline correctly exhibits old-skill failure: discovers SF in code but still wires only S4HANA+AICORE."
+}

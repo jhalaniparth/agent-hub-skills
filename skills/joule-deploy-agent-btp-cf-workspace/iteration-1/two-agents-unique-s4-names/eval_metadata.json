@@ -1,0 +1,11 @@
+{
+  "eval_id": 1,
+  "eval_name": "two-agents-unique-s4-names",
+  "prompt": "Two agents will deploy into the SAME BTP subaccount. Follow the deploy-agent-btp-cf skill for BOTH projects. DRY RUN ONLY: no cf push, no real Destination API calls, no live passwords. For each agent, discover backends and propose destination names that will not collide. Write destinations.json listing proposed destination names for both agents, plus the _load_destinations snippets for each app/main.py. Also write deploy_plan.md. Fixtures: invoice-agent and gr-agent (both use S/4HANA).",
+  "assertions": [
+    "Proposes two different S4-related destination names (one per agent), not a single shared S4HANA for both",
+    "Both proposed S4 destination names include a per-agent discriminator",
+    "AICORE is shared / same name for both agents",
+    "Generated loaders still populate S4_BASE_URL / S4_USERNAME / S4_PASSWORD (system-stable env prefix)"
+  ]
+}

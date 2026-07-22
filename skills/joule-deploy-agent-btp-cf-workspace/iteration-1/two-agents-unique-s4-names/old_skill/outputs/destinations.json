@@ -1,0 +1,67 @@
+{
+  "subaccount_shared": true,
+  "destination_service_instance": "jouleagent-dest",
+  "agents": {
+    "invoice-agent": {
+      "project": "invoice-agent",
+      "backends": ["S/4HANA", "AI Core"],
+      "destinations": [
+        {
+          "name": "S4HANA",
+          "type": "HTTP",
+          "authentication": "BasicAuthentication",
+          "purpose": "S/4HANA OData (purchase orders)",
+          "env_mapping": {
+            "url": "S4_BASE_URL",
+            "User": "S4_USERNAME",
+            "Password": "S4_PASSWORD"
+          }
+        },
+        {
+          "name": "AICORE",
+          "type": "HTTP",
+          "authentication": "OAuth2ClientCredentials",
+          "purpose": "SAP AI Core",
+          "env_mapping": {
+            "aicore_auth_url": "AICORE_AUTH_URL",
+            "aicore_client_id": "AICORE_CLIENT_ID",
+            "aicore_client_secret": "AICORE_CLIENT_SECRET",
+            "aicore_base_url": "AICORE_BASE_URL",
+            "aicore_resource_group": "AICORE_RESOURCE_GROUP"
+          }
+        }
+      ]
+    },
+    "gr-agent": {
+      "project": "gr-agent",
+      "backends": ["S/4HANA", "AI Core"],
+      "destinations": [
+        {
+          "name": "S4HANA",
+          "type": "HTTP",
+          "authentication": "BasicAuthentication",
+          "purpose": "S/4HANA OData (material documents / goods receipts)",
+          "env_mapping": {
+            "url": "S4_BASE_URL",
+            "User": "S4_USERNAME",
+            "Password": "S4_PASSWORD"
+          }
+        },
+        {
+          "name": "AICORE",
+          "type": "HTTP",
+          "authentication": "OAuth2ClientCredentials",
+          "purpose": "SAP AI Core",
+          "env_mapping": {
+            "aicore_auth_url": "AICORE_AUTH_URL",
+            "aicore_client_id": "AICORE_CLIENT_ID",
+            "aicore_client_secret": "AICORE_CLIENT_SECRET",
+            "aicore_base_url": "AICORE_BASE_URL",
+            "aicore_resource_group": "AICORE_RESOURCE_GROUP"
+          }
+        }
+      ]
+    }
+  },
+  "collision_note": "Both agents request destination name S4HANA (hardcoded by skill-snapshot vcap-bridge). In a shared subaccount this is a single Destination entry — credentials collide if the agents need different S/4 systems or users."
+}
