@@ -5,6 +5,7 @@
 | `SapException - No credentials found in any source` | AI Core env vars missing | Set 5 AICORE_ vars via `cf set-env` and restage (see below) |
 | `S4_CONNECTION_ERROR: HTTP 401` | Wrong S/4HANA credentials | Check `S4_USERNAME` / `S4_PASSWORD` env vars |
 | App crashes at start | Wrong command in Procfile | Check path and module:variable reference |
+| `cf push` upload is huge / slow | Local `venv` / `site-packages` included in droplet | Add `.cfignore` excluding `.venv/`, `venv/`, `__pycache__/` — deps install from `requirements.txt` at staging |
 | Health check never passes | App not binding to `$PORT` | Ensure `--port $PORT` in start command |
 | 503 from CF router | Import error / missing dep | `cf logs <app> --recent` |
 | Destination loader warns at startup | No Destination service bound or instance wrong | Check `jouleagent-dest` exists and is bound |

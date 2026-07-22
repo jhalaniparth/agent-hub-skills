@@ -115,7 +115,7 @@ S/4 OData remains one pattern in the guide; SF/Ariba/Concur/CUSTOM get patterns 
 
 | File | Change |
 |------|--------|
-| `SKILL.md` | New Step 1.5; Step 2 uses generated loader; description no longer S/4-only |
+| `SKILL.md` | New Step 1.5; Step 2 uses generated loader; description no longer S/4-only; Step 3 creates `.cfignore` so local venvs/packages are excluded (buildpack installs from `requirements.txt` at staging) |
 | `references/backend-catalog.md` | **New** — catalog, signals, env/auth maps |
 | `references/destination-create.md` | **New** — REST create + Cockpit fallback + idempotency |
 | `references/vcap-bridge.md` | Template + generation rules |
